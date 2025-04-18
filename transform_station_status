@@ -1,0 +1,36 @@
+import pandas as pd
+import json
+
+with open('data/station_status.json') as f:
+    data = json.load(f)
+    df = pd.DataFrame(data)
+
+
+cols = ["is_renting", "is_returning", "is_installed"]
+
+for col in df[cols]:
+    print(f"\nWartości dla kolumny: {col}")
+    print(df[col].value_counts())
+
+
+# print(df)
+df = df[['station_id', 'num_bikes_available', 'num_ebikes_available', 'num_scooters_available']]
+print(df)
+print(df.isnull().sum())
+df["num_scooters_available"].fillna(0, inplace=True)
+
+
+df['average_bikes_availavle'] = (df['num_bikes_available'] + df['num_ebikes_available']) / 2
+df['average_scooters_available'] = df['num_scooters_available']
+
+
+df = df.drop('num_bikes_available', axis='columns')
+df = df.drop('num_ebikes_available', axis='columns')
+df = df.drop('num_scooters_available', axis='columns')
+
+print(df)
+
+df['total_rents'] = 0
+df['total_returns'] = 0
+
+print(df)

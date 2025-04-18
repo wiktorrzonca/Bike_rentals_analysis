@@ -1,0 +1,27 @@
+baza vehicle_types:
+- brak wyzwań
+
+baza station_information:
+- sprawdzono ile jest wartości null - 0
+- sprawdzono czy w bazie nie ma powtórek id stacji
+- sprawdzono czy stacje mieszczą się w chicago i obrzeżach miasta
+
+baza station_status:
+- zostawienie potrzebnych kolumn
+- 434 wartosci null dla num_scooters_available, zamiana na 0
+- utworzono kolumny avg_bikes_available - średnia z bikes i ebikes, avg_scooters_available - scooter 
+- potrzeba dodania kolumny total_rents, total_returns na podstawie tabeli trip_history
+
+baza trip_history:
+- pozbycie się rekordów z brakującymi szerokościami i wysokościami geograficznymi (około 25000)
+- zauważenie, że id stacji w trip_staioons jest niezgodne z id stacji w innych bazach, zaimplementowanie przypisania stacji startowej i 
+  końcowej przy pomocy KD-Tree z biblioteki scipy
+- zapisanie bazy z przypisanymi stacjami początkowymi i końcowymi do nowej bazy trip_history_fixed.json
+
+do zrobienia:
+- dodanie kolumny ile trwała podróż (trzeba rozwiązać sytuacje kiedy zaczynam podroz 23:50 10 marca i kończę 00:10 11 marca) 
+  do dataframu w transfrom_fixed_trip_history
+- dodanie distance_meters do dataframu w transfrom_fixed_trip_history
+- zsumowanie ile wypożyczono i ile zwrócono na konkretną stację do dataframu w transform_station_status.py
+
+
