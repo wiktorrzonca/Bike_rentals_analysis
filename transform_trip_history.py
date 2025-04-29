@@ -1,7 +1,6 @@
 import pandas as pd
 import json
-from math import radians, cos, sin, asin, sqrt
-from scipy.spatial import cKDTree  # Importujemy KD-Tree z scipy
+from scipy.spatial import cKDTree
 
 with open('data/trip_history.json') as f:
     trip_data = json.load(f)

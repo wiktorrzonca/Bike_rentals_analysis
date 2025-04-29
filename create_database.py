@@ -76,9 +76,9 @@ def create_bike_rentals_schema(config_path="DB_CONFIG.json"):
         """)
 
         conn.commit()
-        print("✅ Struktura bazy danych 'bike_rentals' została utworzona.")
+        print("Struktura bazy danych 'bike_rentals' została utworzona.")
     except mysql.connector.Error as err:
-        print(f"❌ Błąd: {err}")
+        print(f"Błąd: {err}")
     finally:
         if conn.is_connected():
             cursor.close()
