@@ -16,7 +16,7 @@ print(df_trips.isna().sum())
 
 df_trips.dropna(subset=["start_lat", "start_lng", "end_lat", "end_lng"], inplace=True)
 
-with open('data/station_information.json') as f:
+with open('data/station_information_final.json') as f:
     station_data = json.load(f)
     df_stations = pd.DataFrame(station_data)
 
@@ -40,4 +40,4 @@ df_trips.loc[missing_end, "end_station_id"] = df_trips[missing_end].apply(
 
 print(df_trips[['start_station_id', 'end_station_id']])
 
-df_trips.to_json("data/trip_history_fixed.json", orient="records", indent=2)
+df_trips.to_json("data/trip_history_final.json", orient="records", indent=2)

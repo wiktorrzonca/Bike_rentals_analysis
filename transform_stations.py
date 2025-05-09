@@ -47,16 +47,31 @@ df = df.groupby(['name', 'lat', 'lon']).agg({
     'station_id': 'first'  # zachowaj jeden station_id, możesz później poprawić
 }).reset_index()
 
-df = df[['station_id', 'name', 'lat', 'lon', 'capacity']]
+import pandas as pd
+import re
 
-bad_station_ids = ['1715823821144840768', '1827474404723843690']
+def normalize_name(name):
+    # Małe litery, usuwanie znaków specjalnych i nadmiarowych spacji
+    name = name.lower()
+    name = re.sub(r'[^a-z0-9& ]', '', name)  # usuwa wszystko poza literami, cyframi, spacjami i '&'
+    name = re.sub(r'\s+', ' ', name)  # redukuje wielokrotne spacje do jednej
+    name = name.strip()
+    return name
 
-df = df[~df['station_id'].astype(str).isin(bad_station_ids)]
+df['normalized_name'] = df['name'].apply(normalize_name)
+
+# Teraz usuń duplikaty bazując na (normalized_name, lat, lon)
+df = df.drop_duplicates(subset=['normalized_name', 'lat', 'lon'])
+
+# Na koniec można usunąć kolumnę pomocniczą
+df = df.drop(columns=['normalized_name'])
+
+print(df)
 
 print(len(df['station_id'].unique()))
 
 
-
+df.to_json("data/station_information_final.json", orient="records", indent=2)
 
 # import matplotlib.pyplot as plt
 # plt.figure(figsize=(10, 8))

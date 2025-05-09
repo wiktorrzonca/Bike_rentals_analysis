@@ -22,18 +22,29 @@ df = df[
 
 # print(df)
 df = df[['station_id', 'num_bikes_available', 'num_ebikes_available', 'num_scooters_available']]
+
 print(df)
 print(df.isnull().sum())
 df["num_scooters_available"].fillna(0, inplace=True)
 
+df = df.rename(columns={'num_bikes_available': 'average_bikes_available', 
+                        'num_ebikes_available': 'average_ebikes_available', 
+                        'num_scooters_available': 'average_scooters_available'})
 
-df = df.drop('num_bikes_available', axis='columns')
-df = df.drop('num_ebikes_available', axis='columns')
-df = df.drop('num_scooters_available', axis='columns')
+print(df)
+
+with open('data/trip_history_final.json') as f:
+    trips = json.load(f)
+    df_trips = pd.DataFrame(trips)
+
+rents = df_trips['start_station_id'].value_counts()
+returns = df_trips['end_station_id'].value_counts()
+
+df['total_rents'] = df['station_id'].map(rents).fillna(0).astype(int)
+df['total_returns'] = df['station_id'].map(returns).fillna(0).astype(int)
 
 print(df)
 
-df['total_rents'] = 0
-df['total_returns'] = 0
+print(sum(df['total_rents']))
 
-print(df)
+df.to_json("data/station_status_final.json", orient="records", indent=2)
