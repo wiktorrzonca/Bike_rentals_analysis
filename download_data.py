@@ -30,11 +30,6 @@ def load_all_data():
         dataframes[name] = df
         save_to_json(df, f"{name}.json")
 
-    trip_path = "202502.csv"
-    df_trip = load_csv_data(trip_path)
-    dataframes["trip_history"] = df_trip
-    save_to_json(df_trip, "trip_history.json")
-
     return dataframes
 
 

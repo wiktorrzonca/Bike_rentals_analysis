@@ -40,9 +40,9 @@ def create_bike_rentals_schema(config_path="DB_CONFIG.json"):
 
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS trip_history (
-                trip_id INT PRIMARY KEY,
-                start_time TIMESTAMP NOT NULL,
-                end_time TIMESTAMP NOT NULL,
+                trip_id VARCHAR(20) PRIMARY KEY,
+                start_time DATETIME NOT NULL,
+                end_time DATETIME NOT NULL,
                 duration_seconds INT NOT NULL,
                 start_station_id VARCHAR(50),
                 end_station_id VARCHAR(50),
