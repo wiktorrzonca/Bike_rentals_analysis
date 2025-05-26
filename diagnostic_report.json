@@ -1,0 +1,20 @@
+{
+  "vehicle_types_count": 3,
+  "station_information_count": 1831,
+  "trip_history_count": 151823,
+  "station_status_count": 1826,
+  "duplicate_station_ids": 0,
+  "avg_trip_duration_sec": 613.8699,
+  "vehicle_usage_stats": [
+    {
+      "vehicle_type_id": "1",
+      "count": 52699
+    },
+    {
+      "vehicle_type_id": "2",
+      "count": 99124
+    }
+  ],
+  "missing_start_station_id": 0,
+  "missing_end_station_id": 0
+}

@@ -15,8 +15,8 @@ def create_bike_rentals_schema(config_path="DB_CONFIG.json"):
         cursor = conn.cursor()
 
         # Tworzenie bazy danych
-        cursor.execute("CREATE DATABASE IF NOT EXISTS bike_rentals")
-        cursor.execute("USE bike_rentals")
+        cursor.execute("CREATE DATABASE IF NOT EXISTS divvy_data") # bike_rentals
+        cursor.execute("USE divvy_data")                           # bike_rentals
 
         # Tworzenie tabel
         cursor.execute("""
