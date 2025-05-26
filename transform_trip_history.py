@@ -51,7 +51,8 @@ df_trips = df_trips[df_trips['trip_duration_sec'] >= 0]
 df_trips['rideable_type'] = df_trips['rideable_type'].astype(str).str.strip()
 type_mapping = {
     "classic_bike": 1,
-    "electric_bike": 2
+    "electric_bike": 2,
+    "electric_scooter": 3,
 }
 df_trips['rideable_type'] = df_trips['rideable_type'].map(type_mapping).fillna(df_trips['rideable_type'])
 
